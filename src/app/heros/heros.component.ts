@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../model/hero';
 import { HeroService } from '../hero.service';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-heros',
@@ -29,7 +30,10 @@ export class HerosComponent implements OnInit {
   }
 
   getHeroes () {
-    this.heroes = this.heroService.getHeroes();
+    this.heroService.getHeroes()
+      .subscribe(heroes => {
+        this.heroes = heroes
+      })
   }
 
 }
