@@ -20,11 +20,21 @@ export class HeroService {
     return this.http.get<Hero[]>(this.heroesUrl, {})
     .pipe(
       tap(heroes => this.log('feteched heroes')),
-      catchError(this.hnadleError('getHeros', []))
+      catchError(this.handleError('getHeros', []))
     )
   }
 
-  private hnadleError<T> (operation = 'operation', result?: T) {
+  /**
+   * this method generates a function which handle the error.
+   * it will be share by all method.
+   * Instead of handling the error directly, it returns an error handler function to catchError that 
+   * it has configured with both the name of the operation that failed and a safe return value.
+   * 
+   * to solve the defferent result type it uses the generic type 
+   * @param operation 
+   * @param result 
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);
       this.log(`${operation} failed: ${error.message}`)
@@ -35,10 +45,15 @@ export class HeroService {
     this.messageService.add('HeroService:' + message)
   }
 
-  private heroesUrl = 'http://127.0.0.1/myapp/backend/heroes'
+  private heroesUrl = '/myapp/backend/heroes'
   
   getHero(id: string): Observable<Hero> {
+    // Applying the optional type specifier, <Hero[]> , gives you a typed result object.
     this.messageService.add('HeroService: fetched hero')
-    return of(HEROES.find(hero => hero.id === id))
+    return this.http.get<Hero>(`${this.heroesUrl}/${id}`)
+      .pipe(
+        tap(_ => this.log(`fetched hero id ${id}`)),
+        catchError(this.handleError<Hero>(`get hero ${id}`))
+      )
   }
 }
