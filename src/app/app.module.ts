@@ -12,8 +12,8 @@ import { MessageService } from './message.service'
 import { AppRoutingModule } from './/app-routing.module'
 import { DashboardComponent } from './dashboard/dashboard.component'
 import { HttpClientModule } from '@angular/common/http'
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
-import { InMemoryDataServiceService } from './in-memory-data-service.service';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
+// import { InMemoryDataServiceService } from './in-memory-data-service.service';
 
 @NgModule({
   declarations: [
@@ -28,9 +28,9 @@ import { InMemoryDataServiceService } from './in-memory-data-service.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataServiceService, { dataEncapsulation: false }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataServiceService, { dataEncapsulation: false }
+    // )
   ],
   providers: [HeroService, MessageService],
   bootstrap: [AppComponent]

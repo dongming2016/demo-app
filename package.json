@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "start": "ng serve --base-href /demoapp/front/",
+    "build": "ng build --prod --base-href /demoapp/front/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

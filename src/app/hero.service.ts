@@ -4,8 +4,8 @@ import { HEROES } from '../mock/heroes';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { MessageService } from './message.service';
-import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, tap } from 'rxjs/operators';
 
 
 @Injectable()
@@ -17,8 +17,9 @@ export class HeroService {
   getHeroes(): Observable<Hero[]> {
     this.messageService.add('HeroService: fetched heroes')
     // return of(HEROES);
-    return this.http.get<Hero[]>(this.heroesUrl)
+    return this.http.get<Hero[]>(this.heroesUrl, {})
     .pipe(
+      tap(heroes => this.log('feteched heroes')),
       catchError(this.hnadleError('getHeros', []))
     )
   }
@@ -34,7 +35,7 @@ export class HeroService {
     this.messageService.add('HeroService:' + message)
   }
 
-  private heroesUrl = 'api/heroes'
+  private heroesUrl = 'http://127.0.0.1/myapp/backend/heroes'
   
   getHero(id: string): Observable<Hero> {
     this.messageService.add('HeroService: fetched hero')
