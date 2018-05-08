@@ -1,0 +1,9 @@
+  <ul>
+    <li *ngFor="let item of heroes; index as i; " (click)="selectHero(item)" class="hero-list">
+      <div [class.selected]="item === selectedHero" class="hero-container">
+        <span>{{i + 1}}</span>
+        <span>{{item.name}}</span>
+      </div>
+    </li>
+  </ul>
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>

@@ -1,0 +1,13 @@
+.hero-list {
+    list-style: none;
+}
+
+.selected {
+    background: #ccc;
+}
+
+.hero-container {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+}
