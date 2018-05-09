@@ -1,9 +1,16 @@
   <ul>
-    <li *ngFor="let item of heroes; index as i; " routerLink='/detail/{{item.id}}' class="hero-list">
-      <div [class.selected]="item === selectedHero" class="hero-container">
+    <li *ngFor="let item of heroes; index as i; "class="hero-list">
+      <div [class.selected]="item === selectedHero" class="hero-container"  routerLink='/detail/{{item.id}}' >
         <span>{{i + 1}}</span>
         <span>{{item.name}}</span>
       </div>
+      <button (click)="deletHero(item.id)">delete</button>
     </li>
   </ul>
+  <div>
+    <label>Hero Name:</label>
+    <input #heroName />
+  </div>
+  
+  <button (click)="addHero(heroName.value); heroName.value=''">add hero</button>
  

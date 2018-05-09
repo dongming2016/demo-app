@@ -1,1 +1,2 @@
 后台接口写好后一定要把HttpClientInMemoryWebApiModule去掉。
+设置上下文的方法：ng serve 后加入--base-href /demoapp/front/

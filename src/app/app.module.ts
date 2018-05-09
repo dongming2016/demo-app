@@ -11,7 +11,8 @@ import { MessageComponent } from './message/message.component'
 import { MessageService } from './message.service'
 import { AppRoutingModule } from './/app-routing.module'
 import { DashboardComponent } from './dashboard/dashboard.component'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { HeroSearchComponent } from './hero-search/hero-search.component'
 // import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api'
 // import { InMemoryDataServiceService } from './in-memory-data-service.service';
 
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http'
     HerosComponent,
     HeroDetailComponent,
     MessageComponent,
-    DashboardComponent
+    DashboardComponent,
+    HeroSearchComponent
   ],
   imports: [
     FormsModule,

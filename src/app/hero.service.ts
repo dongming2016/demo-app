@@ -56,4 +56,35 @@ export class HeroService {
         catchError(this.handleError<Hero>(`get hero ${id}`))
       )
   }
+
+  addHero(hero:Hero): Observable<Hero> {
+    return this.http.post<Hero>(this.heroesUrl, hero).pipe(
+      tap((hero: Hero) => this.log(`added hero w/ id=${hero.id}`),
+      catchError(this.handleError<Hero>('addHero'))
+    ))
+  }
+
+  deleteHero(hero: Hero|string): Observable<any> {
+    // 增加一定的容错。
+    const id = typeof hero === 'string' ? hero : hero.id;
+    return this.http.delete<any>(`${this.heroesUrl}/${id}`).pipe(
+      tap(_ => this.log(`deleted hero id ${id}`)),
+      catchError(this.handleError(`delete hero ${id}`))
+    );
+  }
+
+  searchHero(name: String): Observable<Hero> {
+    return this.http.get<Hero>(`${this.heroesUrl}/search?name=${name}`).pipe(
+      tap(_ => this.log(`searched hero id ${name}`)),
+      catchError(this.handleError<Hero>(`searched hero ${name}`))
+    );
+  }
+
+  updateHero(hero: Hero): Observable<any> {
+    return this.http.put<Hero>(`${this.heroesUrl}`, hero).pipe(
+      tap(hero => this.log(`updated hero ${hero.name}`)),
+      catchError(this.handleError<any>(`update hero ${hero.name}`))
+    )
+  }
+
 }
