@@ -73,10 +73,14 @@ export class HeroService {
     );
   }
 
-  searchHero(name: String): Observable<Hero> {
-    return this.http.get<Hero>(`${this.heroesUrl}/search?name=${name}`).pipe(
+  searchHeros(name: String): Observable<Hero[]> {
+    // 输入为空时做控制。
+    if (!name.trim()) {
+      return of([]);
+    } 
+    return this.http.get<Hero[]>(`${this.heroesUrl}/search?name=${name}`).pipe(
       tap(_ => this.log(`searched hero id ${name}`)),
-      catchError(this.handleError<Hero>(`searched hero ${name}`))
+      catchError(this.handleError<Hero[]>(`searched hero ${name}`))
     );
   }
 

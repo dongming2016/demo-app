@@ -1,2 +1,4 @@
 后台接口写好后一定要把HttpClientInMemoryWebApiModule去掉。
 设置上下文的方法：ng serve 后加入--base-href /demoapp/front/
+
+使用async的时候一定要注意模板中的数据模型与ts中模型一致。
